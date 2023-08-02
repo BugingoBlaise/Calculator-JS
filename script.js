@@ -19,7 +19,7 @@ class Calculator {
 
   appendNumber(number) {
     if (number === "." && this.currentOperand.includes(".")) return;
-    this.currentOperand = this.currentOperand.toString() + number.toString();
+    this.currentOperand = this.currentOperand.toString() + number.toString(); 
   }
 
   chooseOperation(operation) {
@@ -28,10 +28,11 @@ class Calculator {
       this.compute();
     }
     this.operation = operation;
-    this.previousOperand = this.currentOperand;
+    this.previousOperand = this.currentOperand + " " + this.operation;
     this.currentOperand = "";
   }
 
+ 
   compute() {
     let computation;
     const prev = parseFloat(this.previousOperand);
@@ -53,17 +54,21 @@ class Calculator {
       default:
         return;
     }
-    this.currentOperand = computation;
+    this.currentOperand = computation.toString();
     this.operation = undefined;
     this.previousOperand = "";
   }
-
   updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand;
     if (this.operation != null) {
-      this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`;
+      this.previousOperandTextElement.innerText = this.previousOperand;
+    } else {
+      this.previousOperandTextElement.innerText = "";
     }
   }
+
+
+ 
 }
 
 // DOM elements
